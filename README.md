@@ -45,6 +45,7 @@ For the skill, I passed AI the workflow and steps I would take manually to compl
 - **Turn resources into real classes.** Right now they're plain config objects. Classes would give proper type checking and let relationships (`cart.user`, `cart.products[].product`) be easier to reason about.
 - **Strip sensitive fields in code, not by instruction.** The server currently tells the model not to request `password`, `ssn`, `bank`, etc. A prompt can easily be ignored.
 - Serve the API reference as an MCP resource instead of a tool
+- **Bulk fetch by id.** DummyJSON has no "get users 3, 30, 52" endpoint, so the skill makes one `query` call per user. Fix: let `query` take an `ids` array and have the server fan out the requests in parallel, one tool call instead of ten.
 
 ## How to run
 
