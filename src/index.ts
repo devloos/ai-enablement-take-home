@@ -1,6 +1,7 @@
 import { McpServer } from "@modelcontextprotocol/server";
 import { serveStdio } from "@modelcontextprotocol/server/stdio";
 import * as z from "zod/v4";
+import { getAPIDescription } from "./util.js";
 
 const INSTRUCTIONS = `
 Read-only access to the DummyJSON demo store: products, carts, and users (customers).
@@ -13,14 +14,15 @@ function buildServer() {
   );
 
   server.registerTool(
-    "test_tool",
+    "describe_api",
     {
-      title: "Test Tool",
-      description: "Test tool description",
+      title: "Describe the DummyJSON API",
+      description:
+        "Returns routes, query params, notable fields, and relationships for products, carts, and users. Call this once before using query.",
       inputSchema: z.object({}),
       annotations: { readOnlyHint: true, idempotentHint: true },
     },
-    async () => ({ content: [{ type: "text", text: "Test tool response" }] })
+    async () => ({ content: [{ type: "text", text: getAPIDescription() }] })
   );
 
   return server;
