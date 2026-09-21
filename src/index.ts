@@ -2,6 +2,7 @@ import { McpServer } from "@modelcontextprotocol/server";
 import { serveStdio } from "@modelcontextprotocol/server/stdio";
 import * as z from "zod/v4";
 import { getAPIDescription } from "./util.js";
+import { QueryInputSchema, queryApi } from "./api.js";
 
 const INSTRUCTIONS = `
 Read-only access to the DummyJSON demo store: products, carts, and users (customers).
@@ -26,6 +27,36 @@ function buildServer() {
       annotations: { readOnlyHint: true, idempotentHint: true },
     },
     async () => ({ content: [{ type: "text", text: getAPIDescription() }] })
+  );
+
+  server.registerTool(
+    "query_api",
+    {
+      title: "Query the DummyJSON API",
+      description:
+        "GET one DummyJSON endpoint. Pick a resource, an optional path under it, and query params. Returns raw JSON. Errors (e.g. 404) come back as text with isError so you can recover.",
+      inputSchema: QueryInputSchema,
+      annotations: { readOnlyHint: true, idempotentHint: true },
+    },
+    async (input) => {
+      const result = await queryApi(input);
+
+      if (!result.ok) {
+        return {
+          content: [
+            {
+              type: "text",
+              text: `Error: ${result.message}`,
+            },
+          ],
+          isError: true,
+        };
+      }
+
+      return {
+        content: [{ type: "text", text: JSON.stringify(result.data) }],
+      };
+    }
   );
 
   return server;
