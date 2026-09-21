@@ -15,7 +15,7 @@ customer contact details so an employee can follow up. Default N = 10.
 2. Get live stock for every product. One call, small response:
 
    ```
-   query { resource: "products", params: { limit: 0, select: "id,title,stock" } }
+   query_api { resource: "products", params: { limit: 0, select: "id,title,stock" } }
    ```
 
    Build a map of product id → { title, stock }.
@@ -24,7 +24,7 @@ customer contact details so an employee can follow up. Default N = 10.
    filter in step 4 still leaves N results:
 
    ```
-   query { resource: "carts", params: { sortBy: "discountedTotal", order: "desc", limit: <3×N> } }
+   query_api { resource: "carts", params: { sortBy: "discountedTotal", order: "desc", limit: <3×N> } }
    ```
 
    Do NOT use `limit: 0` on carts as it can return a lot of data.
@@ -37,7 +37,7 @@ customer contact details so an employee can follow up. Default N = 10.
 
 5. For each surviving cart, get the customer's contact details:
    ```
-   query { resource: "users", path: "/<userId>", params: { select: "id,firstName,lastName,email" } }
+   query_api { resource: "users", path: "/<userId>", params: { select: "id,firstName,lastName,email" } }
    ```
    Never request or show any other user fields.
 
