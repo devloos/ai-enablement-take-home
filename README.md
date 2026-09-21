@@ -2,6 +2,8 @@
 
 So my task was to build a MCP server and skill for exploring DummyJSON products, carts, and customers.
 
+We should pacakge this up into a claude plugin.
+
 The way I am thinking about this instead of building multiple tools for each endpoint. I want to build a single tool that can be used to explore the entire DummyJSON API.
 
 That being said, I want to somehow scope the API to only products, carts, and customers (for now).
@@ -33,6 +35,10 @@ I also added a timeout to the queryApi function to prevent the server from hangi
 If query fails, that is expressed to the model in the response.
 
 Otherwise, the response is just the raw JSON.
+
+---
+
+For the skill, I passed AI the workflow and steps I would take manually to complete the task. I then had AI generate the skill.md file.
 
 ## Things I'd improve
 
