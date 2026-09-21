@@ -19,3 +19,9 @@ This would allow us to plug that info into the markdown and have a nice descript
 Since this is a shorter take home, I decided to skip a more robust omit sensitive fields feature. I instead just added to the tool call directly to omit certain fields.
 
 I had AI generate the relationships for me.
+
+## Things I'd improve
+
+- **Turn resources into real classes.** Right now they're plain config objects. Classes would give proper type checking and let relationships (`cart.user`, `cart.products[].product`) be easier to reason about.
+- **Strip sensitive fields in code, not by instruction.** The server currently tells the model not to request `password`, `ssn`, `bank`, etc. A prompt can easily be ignored.
+- Serve the API reference as an MCP resource instead of a tool
