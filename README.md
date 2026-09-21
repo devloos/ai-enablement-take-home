@@ -9,3 +9,9 @@ That being said, I want to somehow scope the API to only products, carts, and cu
 So two tools come to mind: describe_api and query_api.
 
 Generic enough to be used for any api but using describe_api we can scope what is allowed to be queried.
+
+# Major Design Decisions
+
+For describe_api, I decided some markdown metadata would be sufficient to describe the API. Possibly just using a list of resources and their endpoints.
+
+This would allow us to plug that info into the markdown and have a nice description of the API.
