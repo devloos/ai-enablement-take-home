@@ -45,3 +45,22 @@ For the skill, I passed AI the workflow and steps I would take manually to compl
 - **Turn resources into real classes.** Right now they're plain config objects. Classes would give proper type checking and let relationships (`cart.user`, `cart.products[].product`) be easier to reason about.
 - **Strip sensitive fields in code, not by instruction.** The server currently tells the model not to request `password`, `ssn`, `bank`, etc. A prompt can easily be ignored.
 - Serve the API reference as an MCP resource instead of a tool
+
+## How to run
+
+```bash
+npm install
+npm run build
+claude --plugin-dir .
+```
+
+## How to test
+
+**Example prompts**
+
+```
+Which carts should we follow up on?
+Top 5 abandoned carts with customer emails
+Show me carts from last week — dummyjson doesn't support dates for carts so this should decline.
+/cart-recovery - manually run skill is also possible
+```
