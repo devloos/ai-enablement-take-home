@@ -1,0 +1,19 @@
+{
+  "name": "dummyjson-tools",
+  "version": "0.1.0",
+  "description": "Claude Plugin > MCP Server + Skill for exploring DummyJSON products, carts, and customers",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/server": "^2.0.0",
+    "zod": "^4.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.13.6",
+    "typescript": "^5.6.0"
+  }
+}
