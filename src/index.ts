@@ -5,6 +5,9 @@ import { getAPIDescription } from "./util.js";
 
 const INSTRUCTIONS = `
 Read-only access to the DummyJSON demo store: products, carts, and users (customers).
+Call describe_api once to learn routes, fields, and how the three relate.
+Users contain sensitive fields (password, ssn, bank, crypto, ip, macAddress) —
+never request or display them. Present results in plain English for non-technical users.
 `;
 
 function buildServer() {
